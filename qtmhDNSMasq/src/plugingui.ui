@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PluginGUIClass</class>
+ <widget class="QMainWindow" name="PluginGUIClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>379</width>
+    <height>321</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>DNSMasq...</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>358</width>
+        <height>82</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>DHCP domain :</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="txtDomainName"/>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>DHCP range :</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="txtDHCPFrom"/>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="txtDHCPTo"/>
+      </item>
+     </layout>
+    </item>
+    <item row="3" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QCheckBox" name="chkNoHosts">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Do not read /etc/hosts</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="4" column="0">
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>358</width>
+        <height>82</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="5" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QPushButton" name="btnDHCPTable">
+        <property name="text">
+         <string>DHCP Table...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnDNSTable">
+        <property name="text">
+         <string>DNS Table...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+   <zorder>label_3</zorder>
+   <zorder>txtDHCPFrom</zorder>
+   <zorder>txtDHCPTo</zorder>
+   <zorder>btnDHCPTable</zorder>
+  </widget>
+  <action name="actionLoad_DNS_table">
+   <property name="text">
+    <string>Load DNS table...</string>
+   </property>
+  </action>
+  <action name="actionSave_DNS_table">
+   <property name="text">
+    <string>Save DNS table...</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btnDHCPTable</sender>
+   <signal>clicked()</signal>
+   <receiver>PluginGUIClass</receiver>
+   <slot>dhcpTableShow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>225</x>
+     <y>289</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>152</x>
+     <y>156</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnDNSTable</sender>
+   <signal>clicked()</signal>
+   <receiver>PluginGUIClass</receiver>
+   <slot>dnsTableShow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>79</x>
+     <y>289</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>152</x>
+     <y>156</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>dnsTableShow()</slot>
+  <slot>dnsTableClosed()</slot>
+  <slot>dhcpTableShow()</slot>
+  <slot>dhcpTableClosed()</slot>
+ </slots>
+</ui>

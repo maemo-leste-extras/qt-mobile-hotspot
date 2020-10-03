@@ -1,0 +1,6 @@
+Packages should create here their system protection scripts.
+Those have to be .sh files and must be executable.
+
+Protection scripts must return 0 if everything was fine, and any other value in case of problem (also they should try to solve it).
+The top-level system protection script will perform a global connectivity reset if at least one protection script detects a problem.
+

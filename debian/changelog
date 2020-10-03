@@ -1,0 +1,152 @@
+qtmobilehotspot (0.3.5) unstable; urgency=low
+
+  * Update of the application
+    - Post-exec script now runs all the scripts located in /opt/qtmobilehotspot/util/systemprotection.d
+    - Wifi configuration now includes MAC changing (normal/custom/random)
+    - Re-added the Windows USB Setup Assistant (before it was a plugin)
+    - Re-added the 2G/3G switcher (before it was in a plugin)
+  * Plugins
+    - Increased interface version from 0.1.2 to 0.1.3
+    - Plugins can now provide some important services to the hotspot (eg : DNS-DHCP server)
+    - New : DNSMasq
+    -- Settings for the DNSMasq DNS/DHCP server (DHCP domain & range, read/not-read hosts file, DNS/DHCP table)
+    - Networking Fixer updates :
+    -- Removed the 2g/3g ping function
+    -- Removed the 2g/3g switcher (moved back to the application)
+    - Removed : Windows USB Setup Assistant (moved back to the application)
+
+ -- Loic Burtin <speedoflight@hotmail.fr>  Mon, 21 Nov 2011 22:00:00 +0100
+
+
+qtmobilehotspot (0.3.4) unstable; urgency=low
+
+  * Update of the application
+    - Preinst / Postinst scripts changed
+    -- General cleanup
+    -- Configuration will not be reset after upgrading the application but only after removing it (for versions >=0.3.4, versions <0.3.4 will have their configuration removed when upgrading to 0.3.4)
+    - Graphical UI changes :
+    -- Added a language selection dialog, it should be shown when the program is started for the first time
+    -- Now using Maemo5 stacked windows (before there were only dialogs)
+    -- Plugins can now be controlled in a dedicated window available by taping the menu bar (before there were entries for each plugin in the menu bar)
+    - Various changes :
+    -- Removed the embedded Windows USB Setup Assistant (it is now a plugin)
+    -- Removed the 2g/3g switcher function (moved to Networking Fixer plugin)
+    - Bug fixes :
+    -- Postinst script did not give privoxy.executable runnable permission due to a typo error (no problem at runtime thought)
+    -- Refresh button in internet access window can no longer be clicked while a scan is already running (this was generating an error and causing the display of saved connections)
+  * Plugins
+    - Increased interface version from 0.1.1 to 0.1.2
+    -- Plugins now have author, contact, description, icon properties
+    -- Plugins can now be enabled/disabled while hotspot is running (if the developer implemented it)
+    -- Plugins do not need anymore to have an 'enabled' property or a 'reset' method on their GUIs
+    - New : Windows USB Setup Assistant
+    -- The driver setup assistant which was previously available via the main menu of Qt Mobile Hotspot
+    - Networking Fixer updates :
+    -- Restored the old power-saving disabling method for USBtoWifi
+    --- Improved : Saved-connection's power-saving is disabled before connection establishment, and is quickly restored after it (less risk to see the default parameter staying as disabled)
+    --- CAUTION : Power-saving disabling is done by tweaking stored connections. If the application isn't stopped properly, this may become the default parameter. Check your internet connections if this happens
+    -- Now handling the 2g/3g switcher function
+    -- Changed 2g/3g ping on/off duration from 10s/10s to 15s/10s
+
+ -- Loic Burtin <speedoflight@hotmail.fr>  Thu, 27 Oct 2011 17:20:30 +0200
+
+
+qtmobilehotspot (0.3.3) unstable; urgency=low
+
+  * Update of the application
+    - Networks list now shows available networks instead of saved ones (those are displayed only if network scanning fails) and can be refreshed
+    - Preparation/unpreparation of the WLAN interface now includes reloading the wl12xx driver (can be disabled)
+    - Post-exec script now reloads the wl12xx driver if something is detected
+    - Bug fixes :
+    -- DNS queries are allowed only if internet sharing is enabled (before it was possible to do DNS requests even if internet wasn't allowed, browsing was impossible thought)
+  * Plugins
+    - Increased interface version from 0.1 to 0.1.1
+    -- Display of plugins entries when hotspot is running/stopped can be enabled/disabled separately (so now there are less entries while hotspot is running)
+    - Networking Fixer updates :
+    -- Can now regularly check the state of the WLAN interface in WifiToGPRS, and turn it up if it went down (occurs when an application scans for available networks using ICD2, ex : user lists available connections)
+    -- Changed the way WLAN power-saving is disabled in USBToWifi, now it is done by regularly turning it off (before it was done by tweaking saved connections power-saving setting)
+    --- This should take some time after hotspot startup (<= 1 minute usually) and requires some activity from the client to be fully effective, but is safer for the end user
+    -- Changed GPRS ping on/off duration from 40s/10s to 10s/10s, should reduce ping-spam related problems (may change this later thought)
+    
+ -- Loic Burtin <speedoflight@hotmail.fr>  Sun, 09 Oct 2011 18:00:30 +0200
+
+
+qtmobilehotspot (0.3.2) unstable; urgency=low
+
+  * Update of the application
+    - When unloading g_ether, switch to g_file_storage (before it was g_nokia, which caused Windows to (try to) install a PC-Suite driver)
+    - Power-saving handling removed (moved to a plugin)
+    - Added a system checker post-exec script, should solve standard problems due to bad termination (wlan ad-hoc, wlan down, usb modules, remaining processes)
+    - Bug fixes :
+    -- USB MAC no more changes after updates (should be good for versions >=0.3.2, versions <0.3.2 will have their MAC changed when updating to 0.3.2)
+    -- Power-saving disabling for USBtoWifi should work correctly now (it was working only when power-saving for the WLAN interface was disabled before starting)
+    -- Corrected 2G/3G switcher (was always switching to Double if the current mode was the same as the one we wanted to get)
+    -- Fixed crash which occured after closing the networking GUI when there was 0 element in the list
+  * Plugins
+    - New : Networking Fixer (disable Wifi power-saving, regularly ping a server while on gprs)
+    - Iptables tweaker updates :
+    -- It is now possible to load/save rules from/to files
+    - MAC filter updates :
+    -- It is now possible to load/save configuration from/to files
+    - Embedded Privoxy updates :
+    -- The port can be changed (8118 is the default)
+    -- The default action files (default.action, match-all.action) can be enabled, the files qtmh.action.qtmh & user.action will always be used
+    -- Proxy forwarding is possible for all Privoxy traffic (ip:port can be set, default is 127.0.0.1:10000)
+    
+ -- Loic Burtin <speedoflight@hotmail.fr>  Tue, 04 Oct 2011 21:13:30 +0200
+
+
+qtmobilehotspot (0.3.1) unstable; urgency=low
+
+  * Update of the application
+    - USB hotspot now uses the g_ether module instead of g_nokia (like Mad Developer). This should make USB networking easier
+    -- In consequence the USB hotspot now requires No-mode, unlike before when it was PC-Suite
+    - Added a setup-assistant for installing g_ether driver on Windows
+    - Added the g_ether driver for Windows in /opt/qtmobilehotspot/docs folder and MyDocs/QtMobileHotspot-Driver (extracted from MADDE, see related wiki entry)
+    - The USB interface's MAC is now fixed to a random value generated the first time qtmobilehotspot is started (it will stay even if the program is updated)
+  * Plugins
+    - Privoxy : util folder cleanup (moved files to util/qtmhprivoxy), added templates
+
+ -- Loic Burtin <speedoflight@hotmail.fr>  Sun, 28 Sept 2011 23:20:30 +0200
+
+
+qtmobilehotspot (0.3) unstable; urgency=low
+
+  * Update of the application
+    - It is now possible to use Wifi instead of 3G (LAN on USB, Internet on Wifi)
+    - Added an option for disabling Wifi power-saving (it is restored at hotspot shutdown), mostly useful for USBtoWifi hotspot
+    -- CAUTION : Power-saving disabling is done by tweaking stored connections. If the application isn't stopped properly, this may become the default parameter. Check your internet connections if this happens
+    -- Power-saving disabling is supposed to have no effect on Ad-Hoc wifi.
+    - In USB mode, the GUI allows to select any of the saved connections. In Wifi mode, only GPRS ones are available
+    - New icon, thanks to Robin Lundgren
+
+ -- Loic Burtin <speedoflight@hotmail.fr>  Sun, 25 Sept 2011 18:20:30 +0200
+
+
+qtmobilehotspot (0.2) unstable; urgency=low
+
+  * Update of the application
+    - Active internet connection is used if its the same as the hotspot one
+    - Previous internet connection is restored after hotspot's shutdown
+    - 2g/3g switcher at startup is now integrated (at stop the original state is restored)
+  * Plugins
+    - New : Embedded Privoxy (with GUI for client user-agent switching)
+    - Removed : 2g/3g switcher plugin (not needed anymore, see above)
+
+ -- Loic Burtin <speedoflight@hotmail.fr>  Wed, 21 Sept 2011 23:19:30 +0200
+
+
+qtmobilehotspot (0.1) unstable; urgency=low
+
+  * Initial pre-release for Maemo5
+    - Wifi hotspot configuration (name, WEP/not-encrypted)
+    - USB hotspot
+    - Enable/disable internet sharing
+    - Change LAN ip
+  * Plugins
+    - Iptables tweaker
+    - MAC filter (allow/disallow MACs)
+    - 2g/3g switcher at start/stop
+
+ -- Loic Burtin <speedoflight@hotmail.fr>  Mon, 12 Sept 2011 23:20:57 +0200
+

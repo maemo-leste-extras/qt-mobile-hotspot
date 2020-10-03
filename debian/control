@@ -1,0 +1,216 @@
+Source: qtmobilehotspot
+Section: user/network
+Priority: optional
+Maintainer: Loic Burtin <speedoflight@hotmail.fr>
+Build-Depends: debhelper (>= 5), libqt4-dev (>= 4.6.1 ), libgq-gconf-dev (>= 0.2-5+0m5)
+Standards-Version: 3.7.2
+
+Package: qtmobilehotspot
+Architecture: armel
+Depends: ${shlibs:Depends}, ${misc:Depends}, rootsh, iptables, wireless-tools, dnsmasq
+XB-Maemo-Display-Name: Qt Mobile Hotspot
+Description: Turn your N900 into a Wifi/USB hotspot !
+ This application allows you to use your N900 as a Wifi/USB access point.
+ .
+ So far the following configurations are possible :
+ * PC -> Wifi (Ad-Hoc) (Open/WEP) -> N900 -> Internet@2G/3G
+ * PC -> USB (No-mode) -> N900 -> Internet@2G/3G
+ * PC -> USB (No-mode) -> N900 -> Internet@Wifi
+ The internet access can also be disabled, transforming the N900 into a simple local server.
+ .
+ .
+ Warning : ONLY FOR POWER USERS ! IT IS A WORK-IN-PROGRESS !
+ The power kernel is required.
+ If you do not know what it is, stay away from this software.
+ You should also know how to reflash your device. 
+ And please : READ ALL THE NOTES BELOW.
+ .
+ .
+ Wifi Hotspot howto :
+ - Recommended : Connect your N900 to your computer using USB, because Ad-Hoc Wifi + 3G costs a lot of power
+ - Choose Wifi in the mode list
+ - Go to the Wifi configuration window, and setup AP name, encryption (5/13 length) and optional MAC address and driver auto-restart
+ - Go to the Network configuration window, and setup your GPRS connection and 2G/3G switcher
+ - Configure plugins if you wish, by taping the application title-bar
+ - Start the hotspot
+ - Connect your PC to your N900's Wifi network
+ - Stop the hotspot once finished
+ .
+ USB Hotspot howto :
+ - Windows users should use first the Windows USB Setup Assistant available by taping the title-bar
+ - Disconnect your N900 from your computer, ensure that it isn't in any USB mode (a reboot may be needed in some extreme cases)
+ - Select USB in the mode list
+ - Go to the Network configuration window, and setup your Wifi/GPRS connection and 2G/3G switcher
+ - Configure plugins if you wish, by taping the application title-bar
+ - Start the hotspot, wait for the success notification
+ - Connect your N900 to your PC
+ -- Windows users : everything should be fine if the USB networking driver is installed correctly
+ -- Linux users : some distros do things automatically, some do not, here are some commands in case you need them (tested on a debian squeeze, run them as root) :
+ --- dmesg   # show device messages, should tell you if your device is recognized
+ --- ifconfig usb0 up   # enable the usb0 network interface
+ --- dhclient -v usb0   # ask for an IP over the usb0 interface, client will stay running in the background and will ask IPs when needed
+ --- route   # display routes, a default one should go through the usb0 interface
+ --- ping 8.8.8.8   # (or any IP address) if it does work, you are connected to the internet
+ --- nslookup example.com   # (or any website) if it does work, dns resolution is working
+ --- ifconfig usb0 down   # disable the usb0 network interface
+ - When you have finished, disconnect your N90300 from your PC, and stop the hotspot (it is better to respect this order)
+ .
+ .
+ Now featuring :
+ - Wifi Ad-Hoc hotspot (AP name, encryption (WEP/not-encrypted), MAC address (normal/custom/random), Wifi driver auto-restart can be changed)
+ - USB hotspot in USB No-mode (no PC-Suite, no mass-storage, this is important)
+ - Enable/disable internet sharing
+ - Change LAN ip (/24 network is forced, thought)
+ - Automatically change of the 2G/3G enforcement at hotspot startup (it is restored at shutdown)
+ - A post-exec script should detect common problems (wlan driver not loaded, wlan still in ad-hoc mode, wlan down when it is supposed up, no usb or wrong usb module loaded, remaining processes) and solve them after application termination
+ - Some plugins
+ -- Networking fixer (tools for fixing slowdown problems : disable Wifi power-saving (see warnings below), keep Wifi interface up if it goes down)
+ -- Iptables tweaker (add your own iptables rules)
+ -- MAC filter (allow/disallow MACs, may be good for keeping your little brother away from your network)
+ -- DNSMasq tweaker (change DHCP domain and range, enable/disable reading of /etc/hosts, use a custom DNS/DHCP table - may be useful for DNS filtering)
+ -- Embedded Privoxy (for client user-agent editing / proxy-forwarding / content-filtering, may help you into bypassing the user-agent-based filtering used by some phone ISPs)
+ .
+ .
+ -- Notes --
+ * This application cannot work with the bleeding-edge wifi driver (the phone reboots when hotspot is started).
+ * Having the hotspot enabled requires a lot of power. Do not undervolt your N900 too much (better, don't undervolt it at all). You should also stop the hotspot as soon as you do not need it anymore.
+ * If you experience a weird system experience after closing the application, a reboot should solve things.
+ * Since version 0.3.3, the application uses available connections instead of saved ones. This may require you to re-select your internet connection if you move to a different place (connection may look the same, but its ID may be different).
+ * Since version 0.3.1, the application uses the g_ether module instead of g_nokia for USB hotspot. It requires you to connect your N900 to your PC in no-mode (no pc-suite, no storage-mode).
+ * The included Windows driver is not designed for PC-Suite mode. It is for the g_ether module which is used by Mad Developper and qtmobilehotspot.
+ * The included g_ether driver for Windows has not been tested against all versions ! Tested architectures are so far : XP-x86, W7-x64.
+ * Disabling Wifi power-saving is done by editing the saved connection (as if you disabled it manually in the hildon control-panel) before connecting to the Wifi access point.
+ * Power-saving is restored when the connection to the access point is effective (or failed). If a crash occurs before this, the default power-saving setting will become 'disabled'. You can change it back to Maximal by using the hildon control-panel.
+ * WEP encryption in ad-hoc mode has been reported to work better with Linux machines than with Windows ones
+ * When using custom / random MACs, the original one is restored at hotspot shutdown. If the hotspot crashes, it will not be restored thought.
+ * The network automatic scan is disabled when the hotspot is started. If you do not stop the hotspot correctly, the scan will become disabled by default. You can get it back using hildon control-panel.
+ .
+ Available languages : EN, FR
+ Credits : Eero af Heurlin for the first MobileHotSpot & Robin Lundgren for the icon
+ Want to debug / understand something : run /opt/qtmobilehotspot/util/start.sh in a user terminal (prepare for onscreen spam thought)
+XSBC-Bugtracker: https://garage.maemo.org/tracker/?group_id=2272
+XB-Maemo-Icon-26:
+ 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
+ kc5pDoVQfujW0Adh5mGLw34MJ4WHhVeGP45wiFga0TGXNXfR3ENz30T6RJZE
+ 3ptnMU85ry1KNSo+qi5qPNo3ujS6P8YuZlnM1VidWElsSxw5LiquNm5svt/8
+ 7fOH4p3iC+N7F5gvyF1weaHOwvSFpxapLhIsOpZATIhOOJTwQRAqqBaMJfIT
+ dyWOCnnCHcJnIi/RNtGI2ENcKh5O8kgqTXqS7JG8NXkkxTOlLOW5hCepkLxM
+ DUzdmzqeFpp2IG0yPTq9MYOSkZBxQqohTZO2Z+pn5mZ2y6xlhbL+xW6Lty8e
+ lQfJa7OQrAVZLQq2QqboVFoo1yoHsmdlV2a/zYnKOZarnivN7cyzytuQN5zv
+ n//tEsIS4ZK2pYZLVy0dWOa9rGo5sjxxedsK4xUFK4ZWBqw8uIq2Km3VT6vt
+ V5eufr0mek1rgV7ByoLBtQFr6wtVCuWFfevc1+1dT1gvWd+1YfqGnRs+FYmK
+ rhTbF5cVf9go3HjlG4dvyr+Z3JS0qavEuWTPZtJm6ebeLZ5bDpaql+aXDm4N
+ 2dq0Dd9WtO319kXbL5fNKNu7g7ZDuaO/PLi8ZafJzs07P1SkVPRU+lQ27tLd
+ tWHX+G7R7ht7vPY07NXbW7z3/T7JvttVAVVN1WbVZftJ+7P3P66Jqun4lvtt
+ Xa1ObXHtxwPSA/0HIw6217nU1R3SPVRSj9Yr60cOxx++/p3vdy0NNg1VjZzG
+ 4iNwRHnk6fcJ3/ceDTradox7rOEH0x92HWcdL2pCmvKaRptTmvtbYlu6T8w+
+ 0dbq3nr8R9sfD5w0PFl5SvNUyWna6YLTk2fyz4ydlZ19fi753GDborZ752PO
+ 32oPb++6EHTh0kX/i+c7vDvOXPK4dPKy2+UTV7hXmq86X23qdOo8/pPTT8e7
+ nLuarrlca7nuer21e2b36RueN87d9L158Rb/1tWeOT3dvfN6b/fF9/XfFt1+
+ cif9zsu72Xcn7q28T7xf9EDtQdlD3YfVP1v+3Njv3H9qwHeg89HcR/cGhYPP
+ /pH1jw9DBY+Zj8uGDYbrnjg+OTniP3L96fynQ89kzyaeF/6i/suuFxYvfvjV
+ 69fO0ZjRoZfyl5O/bXyl/erA6xmv28bCxh6+yXgzMV70VvvtwXfcdx3vo98P
+ T+R8IH8o/2j5sfVT0Kf7kxmTk/8EA5jz/GMzLdsAAAAGYktHRAD/AP8A/6C9
+ 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
+ eNtwyzGST1njgFNE7hiROFJZWTmYhRP6Cy+80CEi4vP5Oq3Bywq8rKzs1tjY
+ WDQej0dramp8NqnEaDgcvigirKurazfaMVMGsuLi4kQymew0CBghuTzT+xwx
+ c6HXX3/9i5/JZ8b6+/t9kUjEZ+H8ffvpp5/u0DQtRnJi165d3XapcmNj45fj
+ 4+O9dveYe+XKlV0kzZ5Ux1S50BZLsvSNpfNgl4z5AQzZ1AfJhoaGHqOK4vHj
+ x7uUUnGbOiICoPvnksFPPvnktImciBycsj4WkaAphQ0bNmQL65Lt+8KFC/sn
+ Jib8FoYMlJaW3p3OszZw2kmOWdo71Xb18F/MEz09PUMWDs+oyjp79mxzZgc3
+ HA5fz/BS095Xrly5aeH+Z9lKylKSQeNgYufOnR2W3ua0gFVUVJwPh8PRvr6+
+ sb6+vlFjj4VCoeTatWu/mGm5+eijj/qi0WjCwElEZK1tT4ikIvk3MWQ1MDDg
+ z83NHZph7RsD0G8YpXUHZigBcTgc6UuXLnWZtkTyGEl31t6QiCwmOdnIvX37
+ 9ldzKNLndOatt946Y2mpRElumG5nbrO1tXfo0KGzFsAPpLm1adOmpowJz9+n
+ 1ZmzELHHQoQcPHiwdZ6bunacl23btt00Wuym7f532mMoi0fKEZHD1rHRqVOn
+ LhgFx3wTMXlXXV3dGVPnDc6fJ1k8qzkBSSfJz6wTmWQy2VZWVtadEfZnOx8w
+ n9O9Xu/A1atXz1m8DUneIlk2pwmNQcQ/REQ3iUin04Pvvfdet9fr7Zhll856
+ rnvPnj13QqHQDxk6f1xEyuY0vbSok5PkNjMXMZYWiUTGTp48eS0vL+9ylkhq
+ R9S3DQ0NzcPDw6PG+NU6mfmriORPB/mZTikfAXAEwOMAcqylHYCb77zzzsDn
+ n3/+8PDwcFUymXTruq6UUlBKwePxaIWFhYNPPPFEz4EDB3JLSko2AnBZ7tYB
+ dAHY5XA4zs37pN6KrIhsBfAqgKcAuC1EmGXfKIB7IqI7HA5lwCkCUGzWvKZ0
+ jWevADgK4IhSKp7BmF9m2E0yj+QqEfmn2RSzqNeUy6LfNAaH/ya5keSC2U7r
+ Z01m5vsNJNeR3KSU2ghglYGUMtQDABJKqV4A1wFcAHDWqMMxF47PWU6ZhIhI
+ rtFnKiLpMBEjOQog6nA4Yr/KSx7z+drNfL7U8X8rt+Ojkpz+rgAAAABJRU5E
+ rkJggg==
+ ====
+
+

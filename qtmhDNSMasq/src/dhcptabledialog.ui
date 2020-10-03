@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DHCPTableDialogClass</class>
+ <widget class="QMainWindow" name="DHCPTableDialogClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>392</width>
+    <height>355</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>DHCP Table...</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QListWidget" name="lstDHCP">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QPushButton" name="btnAdd">
+          <property name="text">
+           <string>Add...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnRemove">
+          <property name="text">
+           <string>Remove</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>392</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionLoad_DHCP_table"/>
+    <addaction name="actionSave_DHCP_table"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <action name="actionLoad_DHCP_table">
+   <property name="text">
+    <string>Load DHCP table...</string>
+   </property>
+  </action>
+  <action name="actionSave_DHCP_table">
+   <property name="text">
+    <string>Save DHCP table...</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>actionLoad_DHCP_table</sender>
+   <signal>triggered()</signal>
+   <receiver>DHCPTableDialogClass</receiver>
+   <slot>loadDHCPTable()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>195</x>
+     <y>177</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSave_DHCP_table</sender>
+   <signal>triggered()</signal>
+   <receiver>DHCPTableDialogClass</receiver>
+   <slot>saveDHCPTable()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>195</x>
+     <y>177</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnAdd</sender>
+   <signal>clicked()</signal>
+   <receiver>DHCPTableDialogClass</receiver>
+   <slot>addDHCP()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>338</x>
+     <y>51</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>195</x>
+     <y>177</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnRemove</sender>
+   <signal>clicked()</signal>
+   <receiver>DHCPTableDialogClass</receiver>
+   <slot>removeDHCP()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>338</x>
+     <y>84</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>195</x>
+     <y>177</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>loadDHCPTable()</slot>
+  <slot>saveDHCPTable()</slot>
+  <slot>addDHCP()</slot>
+  <slot>removeDHCP()</slot>
+ </slots>
+</ui>

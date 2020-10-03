@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MobileHotspotGUIClass</class>
+ <widget class="QMainWindow" name="MobileHotspotGUIClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>723</width>
+    <height>452</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Qt Mobile Hotspot</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_7">
+    <item row="1" column="0" colspan="2">
+     <widget class="QFrame" name="frame2">
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_3">
+         <property name="margin">
+          <number>2</number>
+         </property>
+         <item row="0" column="4">
+          <widget class="QPushButton" name="btnStart">
+           <property name="text">
+            <string>Start</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>7</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="0">
+          <widget class="QComboBox" name="lstInterfaces"/>
+         </item>
+         <item row="0" column="2">
+          <widget class="QPushButton" name="btnStop">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Stop</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>7</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QFrame" name="frame">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <property name="leftMargin">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>2</number>
+       </property>
+       <property name="bottomMargin">
+        <number>15</number>
+       </property>
+       <property name="spacing">
+        <number>2</number>
+       </property>
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="1" column="0">
+          <widget class="QListWidget" name="lstAccessPoint">
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="autoScroll">
+            <bool>false</bool>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::NoSelection</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="btnAccessPoint">
+           <property name="text">
+            <string>Wifi...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QFrame" name="frame_2">
+      <layout class="QGridLayout" name="gridLayout_5">
+       <property name="leftMargin">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>2</number>
+       </property>
+       <property name="bottomMargin">
+        <number>15</number>
+       </property>
+       <property name="spacing">
+        <number>2</number>
+       </property>
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="1" column="0">
+          <widget class="QListWidget" name="lstInternetAccess">
+           <property name="selectionMode">
+            <enum>QAbstractItemView::NoSelection</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="btnInternetAccess">
+           <property name="text">
+            <string>Networking...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>723</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuPlugins">
+    <property name="title">
+     <string>Plugins</string>
+    </property>
+    <addaction name="actionPlugins"/>
+   </widget>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionLanguage"/>
+    <addaction name="actionUSBAssistant"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuPlugins"/>
+  </widget>
+  <action name="actionAbout_qtMobileHotspot">
+   <property name="text">
+    <string>About Qt Mobile Hotspot</string>
+   </property>
+  </action>
+  <action name="actionUSBAssistant">
+   <property name="text">
+    <string>USB For Windows Setup</string>
+   </property>
+  </action>
+  <action name="actionPlugins">
+   <property name="text">
+    <string>Plugins...</string>
+   </property>
+  </action>
+  <action name="actionLanguage">
+   <property name="text">
+    <string>Language...</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btnAccessPoint</sender>
+   <signal>clicked()</signal>
+   <receiver>MobileHotspotGUIClass</receiver>
+   <slot>configureAccessPoint()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>251</x>
+     <y>58</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>33</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnInternetAccess</sender>
+   <signal>clicked()</signal>
+   <receiver>MobileHotspotGUIClass</receiver>
+   <slot>configureInternetAccess()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>458</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>466</x>
+     <y>31</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnStart</sender>
+   <signal>clicked()</signal>
+   <receiver>MobileHotspotGUIClass</receiver>
+   <slot>start()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>711</x>
+     <y>439</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>404</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnStop</sender>
+   <signal>clicked()</signal>
+   <receiver>MobileHotspotGUIClass</receiver>
+   <slot>stop()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>471</x>
+     <y>439</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>718</x>
+     <y>410</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lstInterfaces</sender>
+   <signal>activated(int)</signal>
+   <receiver>MobileHotspotGUIClass</receiver>
+   <slot>configureInterface(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>169</x>
+     <y>425</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>203</x>
+     <y>398</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionPlugins</sender>
+   <signal>triggered()</signal>
+   <receiver>MobileHotspotGUIClass</receiver>
+   <slot>configurePlugins()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>225</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionLanguage</sender>
+   <signal>triggered()</signal>
+   <receiver>MobileHotspotGUIClass</receiver>
+   <slot>configureLanguage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>225</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionUSBAssistant</sender>
+   <signal>triggered()</signal>
+   <receiver>MobileHotspotGUIClass</receiver>
+   <slot>usbWindowsAssistant()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>225</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>configureAccessPoint()</slot>
+  <slot>configureInternetAccess()</slot>
+  <slot>about()</slot>
+  <slot>start()</slot>
+  <slot>stop()</slot>
+  <slot>configureInterface(int)</slot>
+  <slot>configurePlugins()</slot>
+  <slot>configureLanguage()</slot>
+  <slot>usbWindowsAssistant()</slot>
+ </slots>
+</ui>

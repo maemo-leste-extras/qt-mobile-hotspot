@@ -1,0 +1,9 @@
+# QTMH will add its own settings here.
+# The file qtmh.action.qtmh is just a sample we use.
+# The real action file is generated using it, and is called qtmh.action .
+# The real action file is deleted after hotspot shutdown.
+# The settings which will be appended are so far :
+# { +hide-user-agent{$$USERAGENT$$} }
+# / # All websites
+#
+

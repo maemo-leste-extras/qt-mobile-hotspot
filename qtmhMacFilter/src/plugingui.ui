@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PluginGUIClass</class>
+ <widget class="QMainWindow" name="PluginGUIClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>472</width>
+    <height>209</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MAC Filter...</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>MAC filtering is designed for Wifi mode only.</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QScrollArea" name="scroll">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>446</width>
+             <height>94</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="margin">
+             <number>9</number>
+            </property>
+            <item>
+             <layout class="QVBoxLayout" name="vertical"/>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QComboBox" name="lstMode"/>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnAdd">
+          <property name="text">
+           <string>Add...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnRemove">
+          <property name="text">
+           <string>Remove</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>472</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionEnable_all_MACs"/>
+    <addaction name="actionDisable_all_MACs"/>
+    <addaction name="actionLoad_MACs"/>
+    <addaction name="actionSave_MACs"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <action name="actionLoad_MACs">
+   <property name="text">
+    <string>Load MACs...</string>
+   </property>
+  </action>
+  <action name="actionSave_MACs">
+   <property name="text">
+    <string>Save MACs...</string>
+   </property>
+  </action>
+  <action name="actionEnable_all_MACs">
+   <property name="text">
+    <string>Enable all MACs</string>
+   </property>
+  </action>
+  <action name="actionDisable_all_MACs">
+   <property name="text">
+    <string>Disable all MACs</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btnAdd</sender>
+   <signal>clicked()</signal>
+   <receiver>PluginGUIClass</receiver>
+   <slot>addMac()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>149</x>
+     <y>195</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>147</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnRemove</sender>
+   <signal>clicked()</signal>
+   <receiver>PluginGUIClass</receiver>
+   <slot>removeMac()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>254</x>
+     <y>196</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>252</x>
+     <y>214</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionDisable_all_MACs</sender>
+   <signal>triggered()</signal>
+   <receiver>PluginGUIClass</receiver>
+   <slot>disableAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>235</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionEnable_all_MACs</sender>
+   <signal>triggered()</signal>
+   <receiver>PluginGUIClass</receiver>
+   <slot>enableAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>235</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionLoad_MACs</sender>
+   <signal>triggered()</signal>
+   <receiver>PluginGUIClass</receiver>
+   <slot>load()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>235</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSave_MACs</sender>
+   <signal>triggered()</signal>
+   <receiver>PluginGUIClass</receiver>
+   <slot>save()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>235</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>addMac()</slot>
+  <slot>removeMac()</slot>
+  <slot>enableAll()</slot>
+  <slot>disableAll()</slot>
+  <slot>load()</slot>
+  <slot>save()</slot>
+ </slots>
+</ui>

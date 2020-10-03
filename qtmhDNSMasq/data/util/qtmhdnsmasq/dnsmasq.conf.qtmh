@@ -1,0 +1,24 @@
+# This is the configuration of DNSMasq for the DNSMasq plugin of Qt Mobile Hotspot
+# The file dnsmasq.conf.qtmh is the base file - it is copied into another file (the real configuration file)
+# The file dnsmasq.conf is the real configuration file, and is completed by the plugin itself
+# Feel free to update the base file with your own settings
+
+
+# Not in daemon mode, we must have this in order to be able to stop dnsmasq at hotspot shutdown
+no-daemon
+
+# Authoritative mode, may be removed
+dhcp-authoritative
+
+# No negative cache, useful sometimes on 3G
+no-negcache
+
+# Include system configuration
+conf-file=/etc/dnsmasq.conf
+
+
+######################################################
+# The following lines are added by the plugin itself #
+######################################################
+
+
