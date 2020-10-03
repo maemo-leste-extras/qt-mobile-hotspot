@@ -1,11 +1,11 @@
-#include <QtGui/QMainWindow>
-#include <QtGui/QMenuBar>
+#include <QMainWindow>
+#include <QtWidgets/QMenuBar>
 #include <QtCore/QString>
 #include <QtCore/QList>
 #include <QtCore/QStringList>
 #include <QtCore/QListIterator>
-#include <QtGui/QDialog>
-#include <QtGui/QMessageBox>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QMessageBox>
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusMessage>
 #include <QtCore/QTimer>
@@ -126,7 +126,7 @@ bool InternetAccessGUI::apnsRequest(){
 	msg.setArguments(args);
 	QDBusMessage msg2 = dbus.call(msg);
 	if(msg2.type() == msg2.ErrorMessage){
-		qDebug("WARNING : Was not able to get available APNs (%s)", msg2.errorMessage().toAscii().data());
+		qDebug("WARNING : Was not able to get available APNs (%s)", msg2.errorMessage().toLatin1().data());
 		return false;
 	}
 	else
@@ -139,7 +139,7 @@ bool InternetAccessGUI::apnsCancelRequest(){
 	QDBusMessage msg = QDBusMessage::createMethodCall("com.nokia.icd2", "/com/nokia/icd2", "com.nokia.icd2", "scan_cancel_req");
 	QDBusMessage msg2 = dbus.call(msg);
 	if(msg2.type() == msg2.ErrorMessage){
-		qDebug("WARNING : Was not able to cancel APN scan (%s)", msg2.errorMessage().toAscii().data());
+		qDebug("WARNING : Was not able to cancel APN scan (%s)", msg2.errorMessage().toLatin1().data());
 		return false;
 	}
 	else

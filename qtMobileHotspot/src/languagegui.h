@@ -1,7 +1,7 @@
 #ifndef LANGUAGEGUI_H
 #define LANGUAGEGUI_H
 
-#include <QtGui/QDialog>
+#include <QtWidgets/QDialog>
 #include "mobilehotspotconfiguration.h"
 #include "ui_languagegui.h"
 

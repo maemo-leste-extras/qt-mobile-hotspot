@@ -1,14 +1,14 @@
 #ifndef MOBILEHOTSPOTGUI_H
 #define MOBILEHOTSPOTGUI_H
 
-#include <QtGui/QMainWindow>
+#include <QMainWindow>
 #include <QtCore/QList>
 #include <QtCore/QStringList>
 #include <QtCore/QString>
 #include <QtGui/QCloseEvent>
 #include <QtCore/QProcess>
 #include <QtCore/QMap>
-#include <QtGui/QAction>
+#include <QAction>
 #include <QtDBus/QDBusMessage>
 #include <QtCore/QTranslator>
 #include "dbushelper.h"

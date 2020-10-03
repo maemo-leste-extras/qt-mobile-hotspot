@@ -17,7 +17,7 @@ int DBUSHelper::notificationSimple(QString notification){
 	msg.setArguments(args);
 	QDBusMessage msg2 = QDBusConnection::systemBus().call(msg);
 	if(msg2.type() == QDBusMessage::ErrorMessage){
-		qDebug(msg2.errorMessage().toAscii().data());
+		qDebug(msg2.errorMessage().toLatin1().data());
 		return -1;
 	}
 	return 0;
@@ -29,7 +29,7 @@ int DBUSHelper::notificationBig(QString notification){
 	msg.setArguments(args);
 	QDBusMessage msg2 = QDBusConnection::systemBus().call(msg);
 	if(msg2.type() == QDBusMessage::ErrorMessage){
-		qDebug(msg2.errorMessage().toAscii().data());
+		qDebug(msg2.errorMessage().toLatin1().data());
 		return -1;
 	}
 	return 0;
@@ -42,7 +42,7 @@ int DBUSHelper::setCellRadioEnabled(bool enabled){
 	msg.setArguments(args);
 	QDBusMessage msg2 = QDBusConnection::systemBus().call(msg);
 	if(msg2.type() == QDBusMessage::ErrorMessage){
-		qDebug(msg2.errorMessage().toAscii().data());
+		qDebug(msg2.errorMessage().toLatin1().data());
 		return -1;
 	}
 	return 0;
@@ -55,7 +55,7 @@ int DBUSHelper::internetDisconnect(){
 	msg.setArguments(args);
 	QDBusMessage msg2 = QDBusConnection::systemBus().call(msg);
 	if(msg2.type() == QDBusMessage::ErrorMessage){
-		qDebug(msg2.errorMessage().toAscii().data());
+		qDebug(msg2.errorMessage().toLatin1().data());
 		return -1;
 	}
 	return 0;
@@ -68,7 +68,7 @@ int DBUSHelper::internetConnect(QString IAP_ID){
 	msg.setArguments(args);
 	QDBusMessage msg2 = QDBusConnection::systemBus().call(msg);
 	if(msg2.type() == QDBusMessage::ErrorMessage){
-		qDebug(msg2.errorMessage().toAscii().data());
+		qDebug(msg2.errorMessage().toLatin1().data());
 		return -1;
 	}
 	return 0;
@@ -81,11 +81,11 @@ int DBUSHelper::cellInternetAvailable(bool *available){
 	bool ok;
 	char ret = -1;
 	if(msg2.type() == QDBusMessage::ErrorMessage){
-		qDebug(msg2.errorMessage().toAscii().data());
+		qDebug(msg2.errorMessage().toLatin1().data());
 		ok = false;
 	}
 	else
-		ret = msg2.arguments().value(0).toChar().toAscii();
+		ret = msg2.arguments().value(0).toChar().toLatin1();
 	if(ok)
 		*available = (ret == 0 || ret == 1 || ret == 2); // home || roaming || roaming_blink
 	return ok ? 0 : -1;
@@ -98,7 +98,7 @@ int DBUSHelper::internetEnforcement2G3G(DBUS_Enforcement2G3G *enforcement){
 	bool ok;
 	int ret = -1;
 	if(msg2.type() == QDBusMessage::ErrorMessage){
-		qDebug(msg2.errorMessage().toAscii().data());
+		qDebug(msg2.errorMessage().toLatin1().data());
 		ok = false;
 	}
 	else
@@ -138,7 +138,7 @@ int DBUSHelper::setInternetEnforcement2G3G(DBUS_Enforcement2G3G enforcement){
 	msg.setArguments(args);
 	QDBusMessage msg2 = QDBusConnection::systemBus().call(msg);
 	if(msg2.type() == QDBusMessage::ErrorMessage){
-		qDebug(msg2.errorMessage().toAscii().data());
+		qDebug(msg2.errorMessage().toLatin1().data());
 		return -1;
 	}
 	return 0;
@@ -152,7 +152,7 @@ int DBUSHelper::internetConnectionsCount(){
 	bool ok;
 	int ret = -1;
 	if(msg2.type() == QDBusMessage::ErrorMessage){
-		qDebug(msg2.errorMessage().toAscii().data());
+		qDebug(msg2.errorMessage().toLatin1().data());
 		ok = false;
 	}
 	else

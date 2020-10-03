@@ -1,14 +1,14 @@
 #include <QtGui/QCloseEvent>
-#include <QtGui/QMenuBar>
-#include <QtGui/QMessageBox>
-#include <QtGui/QApplication>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QMessageBox>
+#include <QApplication>
 #include <QtCore/QMap>
 #include <QtCore/QString>
 #include <QtCore/QList>
 #include <QtCore/QListIterator>
 #include <QtGui/QFont>
 #include <QtGui/QIcon>
-#include <QtGui/QListWidgetItem>
+#include <QtWidgets/QListWidgetItem>
 #include "mobilehotspotconfiguration.h"
 #include "mobilehotspotplugin.h"
 #include "pluginscontrolgui.h"
@@ -103,7 +103,7 @@ void PluginsControlGUI::pluginSelected(QListWidgetItem *current, QListWidgetItem
 void PluginsControlGUI::configurePlugin(){
 	QString id = sortedPlugins->at(ui.lstPlugins->currentRow());
 	MobileHotspotPlugin *plugin = plugins->value(id);
-	qDebug("Plugin configure : %s", plugin->name().toAscii().data());
+	qDebug("Plugin configure : %s", plugin->name().toLatin1().data());
 	plugin->configure(this, configuration, running, false); // translators are handled by plugins themselves here
 }
 
@@ -112,7 +112,7 @@ void PluginsControlGUI::resetPlugin(){
 		return;
 	QString id = sortedPlugins->at(ui.lstPlugins->currentRow());
 	MobileHotspotPlugin *plugin = plugins->value(id);
-	qDebug("Plugin %s : reset", plugin->name().toAscii().data());
+	qDebug("Plugin %s : reset", plugin->name().toLatin1().data());
 	plugin->configure(this, configuration, running, true); // translators are handled by plugins themselves here
 }
 
@@ -120,7 +120,7 @@ void PluginsControlGUI::enableDisablePlugin(){
 	bool enabled = ui.chkEnabled->isChecked();
 	QString id = sortedPlugins->at(ui.lstPlugins->currentRow());
 	MobileHotspotPlugin *plugin = plugins->value(id);
-	qDebug("Plugin %s : %s", enabled ? "enable" : "disable", plugin->name().toAscii().data());
+	qDebug("Plugin %s : %s", enabled ? "enable" : "disable", plugin->name().toLatin1().data());
 	qApp->installTranslator(plugin->translator());
 		plugin->setPluginEnabled(enabled, configuration, running);
 		enabled = plugin->isPluginEnabled();

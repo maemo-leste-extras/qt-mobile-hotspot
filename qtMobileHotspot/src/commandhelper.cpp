@@ -29,17 +29,17 @@ bool CommandHelper::executeCommandWithStdOut(QString command,  int *result, QStr
 
 bool CommandHelper::executeCommandWithStdOutErr(QString command, int *result, QString *stdout, QString *stderr, int timeoutStartedMS, int timeoutFinishedMS){
 	/* true=ok, false=fail */
-	qDebug( (QString("Command : ") + command).toAscii().data() );
+	qDebug( (QString("Command : ") + command).toLatin1().data() );
 	QProcess process;
 	process.start(command);
 	bool ret = process.waitForStarted(timeoutStartedMS);
 	if(! ret){
-		qDebug( (QString("FAILURE : Command was too slow to start (") + process.errorString() + ")").toAscii().data() );
+		qDebug( (QString("FAILURE : Command was too slow to start (") + process.errorString() + ")").toLatin1().data() );
 		return false;
 	}
 	ret = process.waitForFinished(timeoutFinishedMS);
 	if(! ret){
-		qDebug( (QString("FAILURE : Command was too slow to end (") + process.errorString() + ")").toAscii().data() );
+		qDebug( (QString("FAILURE : Command was too slow to end (") + process.errorString() + ")").toLatin1().data() );
 		return false;
 	}
 	*stdout = QString(process.readAllStandardOutput());
@@ -55,21 +55,21 @@ int CommandHelper::executeCommandOld(QString command){
 }
 
 void CommandHelper::executeCommandOld(QString command, int *result){
-	qDebug( (QString("Old-Command : ") + command).toAscii().data() );
-	int ret = system(command.toAscii().data());
+	qDebug( (QString("Old-Command : ") + command).toLatin1().data() );
+	int ret = system(command.toLatin1().data());
 	*result = WEXITSTATUS(ret);
 }
 
 bool CommandHelper::executeCommandAsync(QString command, QProcess *process, int timeoutStartedMS){
 	/* true=ok, false=fail */
-	qDebug( (QString("Async-Command : ") + command).toAscii().data() );
+	qDebug( (QString("Async-Command : ") + command).toLatin1().data() );
 	if(process->state() != QProcess::NotRunning){
 		qDebug("FAILURE : the given QProcess is linked to a running process, please terminate it");
 		return -1;
 	}
 	process->start(command);
 	if(! process->waitForStarted(timeoutStartedMS)){
-		qDebug((QString("FAILURE : Async-Command did not run on time (") + process->errorString() + ")").toAscii().data());
+		qDebug((QString("FAILURE : Async-Command did not run on time (") + process->errorString() + ")").toLatin1().data());
 		return false;
 	}
 	return true;

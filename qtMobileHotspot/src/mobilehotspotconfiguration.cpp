@@ -187,7 +187,7 @@ void MobileHotspotConfiguration::loadUSBMAC(){
 		file.close();
 	}
 	catch(QString fail){
-		qDebug("WARNING : Was not able to load the USB MAC address (%s), using a new one", fail.toAscii().data());
+		qDebug("WARNING : Was not able to load the USB MAC address (%s), using a new one", fail.toLatin1().data());
 		usbMAC = newMAC();
 		saveUSBMAC();
 	}
@@ -213,10 +213,10 @@ void MobileHotspotConfiguration::saveUSBMAC(){
 	try{
 		if(! file.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
 			throw (QString("Cannot open file ") + FILE_USBMAC);
-		file.write(usbMAC.toAscii());
+		file.write(usbMAC.toLatin1());
 		file.close();
 	}
 	catch(QString fail){
-		qDebug("WARNING : Was not able to save the USB MAC address (%s)", fail.toAscii().data());
+		qDebug("WARNING : Was not able to save the USB MAC address (%s)", fail.toLatin1().data());
 	}
 }

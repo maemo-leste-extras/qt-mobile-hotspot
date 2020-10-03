@@ -1,6 +1,6 @@
-#include <QtGui/QMainWindow>
-#include <QtGui/QMenuBar>
-#include <QtGui/QMessageBox>
+#include <QMainWindow>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QMessageBox>
 #include <QtCore/QString>
 #include "mobilehotspotconfiguration.h"
 #include "accesspointgui.h"

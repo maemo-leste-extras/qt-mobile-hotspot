@@ -1,9 +1,9 @@
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtCore/QTranslator>
 #include <QtCore/QLocale>
 #include <QtCore/QObject>
-#include <QtGui/QMainWindow>
-#include <QtGui/QMessageBox>
+#include <QMainWindow>
+#include <QtWidgets/QMessageBox>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QStringListIterator>
@@ -12,7 +12,7 @@
 #include <QtCore/QMap>
 #include <QtCore/QDir>
 #include <QtCore/QPluginLoader>
-#include <QtGui/QAction>
+#include <QAction>
 #include <QtCore/QList>
 #include <QtCore/QListIterator>
 #include <QtDBus/QDBusConnection>
@@ -86,18 +86,18 @@ void MobileHotspotGUI::loadPlugins(){
 			if(plugin != 0){
 				QString name = plugin->name();
 				if(plugins.contains(name))
-					qDebug( (QString("WARNING : plugin name ") + name + " is already taken").toAscii().data());
+					qDebug( (QString("WARNING : plugin name ") + name + " is already taken").toLatin1().data());
 				else{
 					pluginsTranslatorsBaseNames.insert(name, QFileInfo(dir, filename).completeBaseName());
 					plugins.insert(name, plugin);
-					qDebug( (QString("Loaded plugin ") + name).toAscii().data() );
+					qDebug( (QString("Loaded plugin ") + name).toLatin1().data() );
 				}
 			}
 		}
 		else
-			qDebug(loader.errorString().toAscii().data());
+			qDebug(loader.errorString().toLatin1().data());
 	}
-	qDebug( (QString("Loaded ") + QString::number(plugins.size()) + " plugins").toAscii().data() );
+	qDebug( (QString("Loaded ") + QString::number(plugins.size()) + " plugins").toLatin1().data() );
 }
 
 void MobileHotspotGUI::sortPlugins(){
@@ -132,9 +132,9 @@ void MobileHotspotGUI::updateServicesPlugins(){
 			while(iterator2.hasNext()){
 				QString service = iterator2.next();
 				if(servicesPlugins.contains(service))
-					qDebug("WARNING : Service %s is already provided, cannot be given to plugin %s !", service.toAscii().data(), plugin->name().toAscii().data());
+					qDebug("WARNING : Service %s is already provided, cannot be given to plugin %s !", service.toLatin1().data(), plugin->name().toLatin1().data());
 				else{
-					qDebug("Plugin %s will provide service %s", plugin->name().toAscii().data(), service.toAscii().data());
+					qDebug("Plugin %s will provide service %s", plugin->name().toLatin1().data(), service.toLatin1().data());
 					servicesPlugins.insert(service, plugin);
 				}
 			}
@@ -423,7 +423,7 @@ void MobileHotspotGUI::startProcedure(){
 	while(pluginsIterator.hasNext()){
 		MobileHotspotPlugin *plugin = plugins.value(pluginsIterator.next());
 		if(plugin->isPluginEnabled()){
-			qDebug( (QString("Plugin beforeStarting : ") + plugin->name()).toAscii().data() );
+			qDebug( (QString("Plugin beforeStarting : ") + plugin->name()).toLatin1().data() );
 			qApp->installTranslator(plugin->translator());
 				plugin->beforeStarting(&configuration);
 			qApp->removeTranslator(plugin->translator());
@@ -448,7 +448,7 @@ void MobileHotspotGUI::startProcedure(){
 
 		/** Internet connection handling **/
 		if(configuration.internetEnabled){
-			qDebug("Previous internet connection was %s (%s), next one is %s (%s)", previousConnectionID.toAscii().data(), previousConnectionType.toAscii().data(), configuration.internetAPID.toAscii().data(), configuration.internetAPType.toAscii().data());
+			qDebug("Previous internet connection was %s (%s), next one is %s (%s)", previousConnectionID.toLatin1().data(), previousConnectionType.toLatin1().data(), configuration.internetAPID.toLatin1().data(), configuration.internetAPType.toLatin1().data());
 			if(previousConnectionType == configuration.internetAPType && previousConnectionID == configuration.internetAPID && configuration.internetInterface() != configuration.INTERFACE_WLAN)
 				/** Nothing to do to the internet connection **/
 				/** In case of USB-Lan and Wifi-Inet we have to disconnect & reconnect to prevent route disappearing problem **/
@@ -568,7 +568,7 @@ void MobileHotspotGUI::startProcedure(){
 		// There :) Finished
 	}
 	catch(QString error){
-		qDebug(error.toAscii().data());
+		qDebug(error.toLatin1().data());
 		success= false;
 		if(showNotifications)
 			QMessageBox::critical(this, tr("Failed to start the hotspot"), error);
@@ -580,7 +580,7 @@ void MobileHotspotGUI::startProcedure(){
 	while(pluginsIterator.hasNext()){
 		MobileHotspotPlugin *plugin = plugins.value(pluginsIterator.next());
 		if(plugin->isPluginEnabled()){
-			qDebug( (QString("Plugin afterStarting : ") + plugin->name()).toAscii().data() );
+			qDebug( (QString("Plugin afterStarting : ") + plugin->name()).toLatin1().data() );
 			qApp->installTranslator(plugin->translator());
 				plugin->afterStarting(&configuration, successStarting);
 			qApp->removeTranslator(plugin->translator());
@@ -640,7 +640,7 @@ void MobileHotspotGUI::stopProcedure(){
 	while(pluginsIterator.hasPrevious()){
 		MobileHotspotPlugin *plugin = plugins.value(pluginsIterator.previous());
 		if(plugin->isPluginEnabled()){
-			qDebug( (QString("Plugin beforeStopping : ") + plugin->name()).toAscii().data() );
+			qDebug( (QString("Plugin beforeStopping : ") + plugin->name()).toLatin1().data() );
 			qApp->installTranslator(plugin->translator());
 				plugin->beforeStopping(&configuration, successStarting);
 			qApp->removeTranslator(plugin->translator());
@@ -652,7 +652,7 @@ void MobileHotspotGUI::stopProcedure(){
 		/** Plugin-provided service **/
 		MobileHotspotPlugin *plugin = servicesPlugins.value(PROVIDE_IPTABLES);
 		if(! plugin->unprovide(PROVIDE_IPTABLES, &configuration, successStarting)){
-			qDebug("Error while unsetting iptables using plugin : %s", plugin->name().toAscii().data());
+			qDebug("Error while unsetting iptables using plugin : %s", plugin->name().toLatin1().data());
 			success = false;
 		}
 	}
@@ -670,7 +670,7 @@ void MobileHotspotGUI::stopProcedure(){
 		/** Plugin-provided service **/
 		MobileHotspotPlugin *plugin = servicesPlugins.value(PROVIDE_DNSDHCP);
 		if(! plugin->unprovide(PROVIDE_DNSDHCP, &configuration, successStarting)){
-			qDebug("Error while stopping DNS/DHCP server using plugin : %s", plugin->name().toAscii().data());
+			qDebug("Error while stopping DNS/DHCP server using plugin : %s", plugin->name().toLatin1().data());
 			success = false;
 		}
 	}
@@ -695,7 +695,7 @@ void MobileHotspotGUI::stopProcedure(){
 			/** Plugin-provided service **/
 			MobileHotspotPlugin *plugin = servicesPlugins.value(PROVIDE_USBINTERFACE);
 			if(! plugin->unprovide(PROVIDE_USBINTERFACE, &configuration, successStarting)){
-				qDebug("Error while unpreparing USB interface using plugin : %s", plugin->name().toAscii().data());
+				qDebug("Error while unpreparing USB interface using plugin : %s", plugin->name().toLatin1().data());
 				success = false;
 			}
 		}
@@ -713,7 +713,7 @@ void MobileHotspotGUI::stopProcedure(){
 			/** Plugin-provided service **/
 			MobileHotspotPlugin *plugin = servicesPlugins.value(PROVIDE_USBMODULE);
 			if(! plugin->unprovide(PROVIDE_USBMODULE, &configuration, successStarting)){
-				qDebug("Error while unloading USB module using plugin : %s", plugin->name().toAscii().data());
+				qDebug("Error while unloading USB module using plugin : %s", plugin->name().toLatin1().data());
 				success = false;
 			}
 		}
@@ -745,7 +745,7 @@ void MobileHotspotGUI::stopProcedure(){
 			/** Plugin-provided service **/
 			MobileHotspotPlugin *plugin = servicesPlugins.value(PROVIDE_WLANINTERFACE);
 			if(! plugin->unprovide(PROVIDE_WLANINTERFACE, &configuration, successStarting)){
-				qDebug("Error while unpreparing Wifi interface using plugin : %s", plugin->name().toAscii().data());
+				qDebug("Error while unpreparing Wifi interface using plugin : %s", plugin->name().toLatin1().data());
 				success = false;
 			}
 		}
@@ -808,7 +808,7 @@ void MobileHotspotGUI::stopProcedure(){
 		/** Plugin-provided service **/
 		MobileHotspotPlugin *plugin = servicesPlugins.value(PROVIDE_SYSTEMMODULES);
 		if(! plugin->unprovide(PROVIDE_SYSTEMMODULES, &configuration, successStarting)){
-			qDebug("Error while unloading system modules using plugin : %s", plugin->name().toAscii().data());
+			qDebug("Error while unloading system modules using plugin : %s", plugin->name().toLatin1().data());
 			success = false;
 		}
 	}
@@ -830,7 +830,7 @@ void MobileHotspotGUI::stopProcedure(){
 	while(pluginsIterator.hasPrevious()){
 		MobileHotspotPlugin *plugin = plugins.value(pluginsIterator.previous());
 		if(plugin->isPluginEnabled()){
-			qDebug( (QString("Plugin afterStopping : ") + plugin->name()).toAscii().data() );
+			qDebug( (QString("Plugin afterStopping : ") + plugin->name()).toLatin1().data() );
 			qApp->installTranslator(plugin->translator());
 				plugin->afterStopping(&configuration, successStarting, success);
 			qApp->removeTranslator(plugin->translator());
@@ -867,7 +867,7 @@ void MobileHotspotGUI::previousConnectionSignal(const QDBusMessage &message){
 		return;
 	QString errorMessage = args.at(6).toString();
 	if(errorMessage != ""){
-		qDebug((QString("Error while testing previous connection : ") + errorMessage).toAscii().data());
+		qDebug((QString("Error while testing previous connection : ") + errorMessage).toLatin1().data());
 		return;
 	}
 	previousConnectionID = QString(args.at(5).toByteArray());

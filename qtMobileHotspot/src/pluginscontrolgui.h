@@ -1,9 +1,9 @@
 #ifndef PLUGINSCONTROLGUI_H
 #define PLUGINSCONTROLGUI_H
 
-#include <QtGui/QMainWindow>
+#include <QMainWindow>
 #include <QtGui/QCloseEvent>
-#include <QtGui/QListWidgetItem>
+#include <QtWidgets/QListWidgetItem>
 #include <QtCore/QMap>
 #include <QtCore/QString>
 #include <QtCore/QList>

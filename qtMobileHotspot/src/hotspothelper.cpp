@@ -31,14 +31,14 @@ int HotspotHelper::loadSystemModules(QStringList *alreadyLoadedModules){
 	while(iterator.hasNext()){
 		QString mod = iterator.next();
 		if(loadedModules.count(mod) > 0){
-			qDebug( (mod + " already loaded").toAscii().data() );
+			qDebug( (mod + " already loaded").toLatin1().data() );
 			alreadyLoadedModules->append(mod);
 		}
 		else{
-			qDebug( (QString("Loading ") + mod).toAscii().data() );
+			qDebug( (QString("Loading ") + mod).toLatin1().data() );
 			int ret = loadModule(mod);
 			if(ret != 0){
-				qDebug( (QString("FAILURE WHEN LOADING ") + mod).toAscii().data());
+				qDebug( (QString("FAILURE WHEN LOADING ") + mod).toLatin1().data());
 				result = -1;
 			}
 		}
@@ -69,12 +69,12 @@ int HotspotHelper::unloadSystemModules(QStringList &alreadyLoadedModules){
 	while(iterator.hasPrevious()){
 		QString mod = iterator.previous();
 		if(alreadyLoadedModules.contains(mod))
-			qDebug( (QString("Not unloading (was already loaded at startup) ") + mod).toAscii().data());
+			qDebug( (QString("Not unloading (was already loaded at startup) ") + mod).toLatin1().data());
 		else{
-			qDebug((QString("Unloading ") + mod).toAscii().data());
+			qDebug((QString("Unloading ") + mod).toLatin1().data());
 			int ret = unloadModule(mod);
 			if(ret != 0){
-				qDebug( (QString("FAILURE WHEN UNLOADING ") + mod).toAscii().data());
+				qDebug( (QString("FAILURE WHEN UNLOADING ") + mod).toLatin1().data());
 				result = -1;
 			}
 		}
@@ -117,7 +117,7 @@ int HotspotHelper::enableInternetConnection(MobileHotspotConfiguration &configur
 	/* -1=fail, -2=timeout, 0=ok */
 	int ret, tries;
 	bool trying;
-	qDebug( (((QString("** Enabling internet connection to ") + configuration.internetAPName) + " (") + (configuration.internetAPID + ") **")).toAscii().data() );
+	qDebug( (((QString("** Enabling internet connection to ") + configuration.internetAPName) + " (") + (configuration.internetAPID + ") **")).toLatin1().data() );
 	ret = DBUSHelper::internetConnect(configuration.internetAPID);
 	if(ret != 0){
 		qDebug("Error while connecting to the chosen APN");
@@ -598,7 +598,7 @@ int HotspotHelper::setEncryption(MobileHotspotConfiguration &configuration, bool
 
 QString HotspotHelper::keyToHex(QString key){
 	QString result = "";
-	QByteArray data = key.toAscii();
+	QByteArray data = key.toLatin1();
 	for(int i = 0; i < data.size(); i++){
 		QString hex;
 		hex.setNum((int)data.at(i), 16);

@@ -3,7 +3,7 @@
 
 #define TIME_APNS ((int)2500)
 
-#include <QtGui/QMainWindow>
+#include <QMainWindow>
 #include <QtGui/QCloseEvent>
 #include <QtCore/QString>
 #include <QtCore/QList>

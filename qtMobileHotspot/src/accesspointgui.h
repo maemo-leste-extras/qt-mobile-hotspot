@@ -1,7 +1,7 @@
 #ifndef ACCESSPOINTGUI_H
 #define ACCESSPOINTGUI_H
 
-#include <QtGui/QMainWindow>
+#include <QMainWindow>
 #include <QtGui/QCloseEvent>
 #include "mobilehotspotconfiguration.h"
 #include "ui_accesspointgui.h"

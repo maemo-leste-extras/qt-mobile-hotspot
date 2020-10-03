@@ -12,6 +12,8 @@ TEMPLATE = app
 # We need to enable DBUS
 QT += dbus
 
+QT += widgets
+
 # We need those lines to enable GCONF support
 CONFIG += link_pkgconfig
 PKGCONFIG += gq-gconf

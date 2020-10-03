@@ -3,7 +3,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>
-#include <QtGui/QMainWindow>
+#include <QMainWindow>
 #include <QtGui/QIcon>
 #include <QtCore/QTranslator>
 #include "mobilehotspotconfiguration.h"
